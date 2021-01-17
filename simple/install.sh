@@ -1,11 +1,16 @@
 #!/usr/bin/env sh
 
+check() {
+    echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+}
+
 CHECK_MARK="\e[32m✔\e[0m"
+TOTAL_CHECKS=""
 
 # update and upgrade
 echo "Update system.."
 sudo apt update && sudo apt -y upgrade
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install zsh
 echo -n "Check if zsh is installed.."
@@ -16,7 +21,7 @@ if ! hash zsh 2>/dev/null; then
     # get oh-my-zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install neovim
 echo -n "Check if neovim is installed.."
@@ -29,7 +34,7 @@ if ! hash nvim 2>/dev/null; then
     # install plugins
     nvim -c "PlugInstall"
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install tmux
 echo -n "Check if tmux (rust) is installed.."
@@ -46,7 +51,7 @@ if ! hash cargo 2>/dev/null; then
     # get cargo
     curl https://sh.rustup.rs -sSf | sh
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install xclip
 echo -n "Check if xclip is installed.."
@@ -54,7 +59,7 @@ if ! hash xclip 2>/dev/null; then
     echo " installing..."
     sudo apt install -y xclip
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install exa
 echo -n "Check if exa is installed.."
@@ -62,7 +67,7 @@ if ! hash exa 2>/dev/null; then
     echo " installing..."
     sudo apt install -y exa
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install dust
 echo -n "Check if dust is installed.."
@@ -71,7 +76,7 @@ if ! hash dust 2>/dev/null; then
     # get dust
     cargo install du-dust
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 # install python
 echo -n "Check if python is installed.."
@@ -85,7 +90,7 @@ if ! hash python3 2>/dev/null; then
     sudo apt install -y build-essential libssl-dev libffi-dev python3-dev
     sudo apt install -y python3-venv
 fi
-echo " $CHECK_MARK" && TOTAL_CHECKS=$TOTAL_CHECKS$CHECK_MARK
+check
 
 echo ""
 echo "🌟✨ It's done! $TOTAL_CHECKS"
