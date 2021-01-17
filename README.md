@@ -6,10 +6,10 @@
 
 ## Two possibilities
 
-### Quick and versatile
+### Simple and quick
 
-The `simple` directory is for small compute like Raspberry or for quick usage without dependencies issue.
+The `simple` directory is for simple and quick usage like Raspberry or servers, with the least dependencies possible.
 
 ### Full setup
 
-The `complete` directory is a complete for main PC.
+The `complete` directory is for the full installation.
