@@ -1,0 +1,100 @@
+#!/usr/bin/env sh
+
+### ALIASES COMMANDS ###
+alias nv="nvim"
+alias nvzc="nv $HOME/.zshrc"
+alias nvac="nv $HOME/.config/aliases"
+alias nvhc="nv $HOME/.zsh_history"
+alias nvtc="nv $HOME/.tmux.conf"
+alias nvnc="nv $HOME/.config/nvim/init.vim"
+alias nvgt="nv -c ':Gedit :'"
+alias nvcg="nv $HOME/.config/startup"
+alias srczsh="source $HOME/.zshrc"
+alias tl="tmux ls"
+alias ta="tmux attach -t"
+alias td="tmux detach"
+alias tk="tmux kill-session -t"
+alias clc="clear && printf '\033[3J'"
+alias exa="exa --group-directories-first"
+alias ls="exa"
+alias c="clear; ls"
+alias ..="cd .."
+alias ...="cd ../.."
+alias rm="rm -ri"
+alias mv="mv -i"
+alias xclip="xclip -selection c"
+alias tcopy="tmux show-buffer | xclip"
+alias cpwd="echo -n $(pwd) | xclip -i"
+alias :q="exit"
+alias dodo="systemctl suspend"
+alias py="python3"
+alias pip="py -m pip"
+alias delta="$HOME/sw/delta"
+alias dust="dust -r -d 1"
+alias fd="fdfind"
+
+
+### FUNCTIONS COMMANDS ###
+cd() {
+    builtin cd "$@" && ls
+    if [ -z "$@" ]; then
+        c
+    fi
+}
+do_exist() {
+    [[ -f "$1" ]] || echo "cannot open $1"
+}
+pdf() {
+    for file in "$@"; do
+        $(do_exist "$file") && xdg-open "$file" &>/dev/null
+    done
+}
+mdiff() {
+    diff -u $1 $2 | delta
+}
+path() {
+	old=$IFS
+	IFS=:
+	printf "%s\n" $PATH
+	IFS=$old
+}
+copy() {
+    echo -n "$@" | xclip
+}
+fcopy() {
+    cat "$@" | xclip
+}
+fsync() {
+    cp "$@" ~/doc/sync/default
+}
+tm() {
+    [[ $# -eq 0 ]] && SESSION="main" || SESSION="$1"
+    # Complex sessions
+    if [[ $SESSION == "obs" ]]; then
+        tmux new-session -s $SESSION -n "main" -c "$HOME/obs/ts" \; \
+             send-keys 'c' C-m \; \
+             split-window -vc "$HOME/obs/ts/doc" \; \
+             new-window -n "A11" -c "$HOME/obs/rf_bench_a11"\; \
+             send-keys 'c' C-m \; \
+             attach
+    elif [[ $SESSION == "main" ]]; then
+        tmux new-session -s $SESSION -n "" -c "$HOME" \; \
+             new-window -n "main" -c "$HOME"\; \
+             select-window -t 1 \; \
+             attach
+    # Simple sessions
+    else 
+        declare -A sessions=( ["rob"]="rob" )
+        tmux new-session -s $SESSION -n "main" -c "$HOME/${sessions[$SESSION]}"
+    fi
+}
+silent() {
+    "$@" &>/dev/null &
+}
+replace-space() {
+    for file in *; do mv "$file" `echo $file | tr ' ' '_'` ; done
+}
+
+
+### ALIASES APPLICATIONS ###
+alias vlc='vlc &>/dev/null'

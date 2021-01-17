@@ -1,0 +1,11 @@
+{
+    "diagnostic.displayByAle": true
+    //"python.linting.enabled": false
+    //"python.linting.pylintEnabled": true,
+    //"python.linting.pylintArgs": ["--rcfile", "~/.pylintrc"],
+    //"python.linting.mypyEnabled": true,
+    //"python.linting.mypyArgs": ["--ignore-missing-imports", "--follow-imports=silent", "--show-column-numbers", "--strict", "--cache-dir=/dev/null"],
+    //"python.formatting.provider": "black",
+    //"python.formatting.blackArgs": ["--line-length", "100"],
+    //"coc.preferences.formatOnSaveFiletypes": ["python"]
+}
