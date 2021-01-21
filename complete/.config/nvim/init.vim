@@ -9,8 +9,6 @@ Plug 'jreybert/vimagit'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
-" Plug 'tsony-tsonev/nerdtree-git-plugin'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'simeji/winresizer'
@@ -45,7 +43,7 @@ noremap <C-a> <Nop>
 noremap <c-z> <nop>
 noremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-noremap <F3> :set invnumber<CR>
+noremap <F3> :set nu!<CR>:set rnu!<CR>
 nnoremap <F4> :ls<CR>:b<Space>
 nnoremap <F5> :enew<CR>:E<CR>
 nnoremap <F6> :b#<CR>
@@ -56,8 +54,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 nnoremap <Char-60> :execute "tabmove" tabpagenr() - 2 <CR>
 nnoremap <Char-62> :execute "tabmove" tabpagenr() + 1 <CR>
-" nnoremap <C-s> :%s/<C-r><C-w>//g<Left><Left>
-" vnoremap <c-f> "hy/<C-r>h<CR>:%s/\<<C-r>h\>/<C-r>h/gc<left><left><left>
 nnoremap <c-s> :%s///gc<left><left><left>
 vnoremap <c-s> :s///gc<left><left><left>
 vnoremap / <Esc>/\%V
@@ -125,9 +121,13 @@ let g:vimtex_compiler_latexmk = {'build_dir' : 'etc'}
 autocmd FileType qf setlocal wrap
 
 " Ale settings
+nnoremap ]a :ALENextWrap<CR>
+nnoremap [a :ALEPreviousWrap<CR>
+nnoremap ]A :ALEFirst<CR>
+nnoremap [A :ALELast<CR>
 let g:ale_disable_lsp = 1
-let g:ale_sign_error = '✘ '
-let g:ale_sign_warning = '⚠ '
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
@@ -158,11 +158,13 @@ let test#neovim#term_position = "bel"
 tmap <Esc> <C-\><C-n>
 
 " tmuxify
-let g:tmuxify_custom_command = 'tmux split-window -d'
+let g:tmuxify_custom_command = 'tmux split-window -dl 10'
 let g:tmuxify_map_prefix = '<leader>m'
 let g:tmuxify_run = {}
 let g:tmuxify_global_maps = 1
-nmap <leader>tq :TxKill!<CR>
+let $TMUXIFY_COMMAND = stdpath('config') . "/tmuxify_command.vim"
+source $TMUXIFY_COMMAND
+nnoremap <silent> <leader>mx :TmuxifyCommand<CR>
 
 " Coc settings
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env']

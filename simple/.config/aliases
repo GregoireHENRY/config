@@ -15,8 +15,6 @@ alias ta="tmux attach -t"
 alias td="tmux detach"
 alias tk="tmux kill-session -t"
 alias clc="clear && printf '\033[3J'"
-alias exa="exa --group-directories-first"
-alias ls="exa"
 alias c="clear; ls"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -32,6 +30,8 @@ alias pip="py -m pip"
 alias delta="$HOME/sw/delta"
 alias dust="dust -r -d 1"
 alias fd="fdfind"
+alias tmuxify-command="nv $HOME/.config/nvim/tmuxify_command.sh"
+alias df="df -hx'squashfs'"
 
 
 ### FUNCTIONS COMMANDS ###
@@ -94,7 +94,3 @@ silent() {
 replace-space() {
     for file in *; do mv "$file" `echo $file | tr ' ' '_'` ; done
 }
-
-
-### ALIASES APPLICATIONS ###
-alias vlc='vlc &>/dev/null'

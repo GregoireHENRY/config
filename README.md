@@ -4,12 +4,17 @@
 
 -----
 
-## Two possibilities
+## Usage
 
-### Simple and quick
+To install the configuration files:
 
-The `simple` directory is for simple and quick usage like Raspberry or servers, with the least dependencies possible.
+```sh
+./install.sh [OPTION]
+```
 
-### Full setup
+OPTIONS:
 
-The `complete` directory is for the full installation.
++ `-s`, `--simple`: simple installation, ignore fancy plugins for neovim or tmux
++ `-c`, `--copy`: to copy and replace automatically your configurations files with those in the repository
+
+A backup of your replaced configuration files is created in `/tmp/greg-config`.

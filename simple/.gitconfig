@@ -1,6 +1,6 @@
 [user]
 	name = gregH
-    email = mail.greg.henry@gmail.com
+	email = mail.greg.henry@gmail.com
 [core]
 	editor = nvim
 [github]

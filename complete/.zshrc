@@ -15,6 +15,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="mm/dd/yyyy"
 setopt inc_append_history
 setopt extendedglob
+export LANG=en_US.UTF-8
 
 # Plugins
 plugins=(git)

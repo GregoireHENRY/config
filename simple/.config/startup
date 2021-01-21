@@ -1,1 +1,8 @@
+#!/usr/bin/env sh
+
+# Detect key press faster and repeat them faster.
+# Values are given in ms: delay and rate (default: 660 25).
 xset r rate 190 60
+
+# keyboard azerty
+setxkbmap fr

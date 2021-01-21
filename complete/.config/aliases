@@ -14,7 +14,6 @@ alias nvac="nv $HOME/.config/aliases"
 alias nvhc="nv $HOME/.zsh_history"
 alias nvtc="nv $HOME/.tmux.conf"
 alias nvnc="nv $HOME/.config/nvim/init.vim"
-alias nvay="nv $HOME/.config/alacritty/alacritty.yml"
 alias nvgt="nv -c ':Gedit :'"
 alias nvcg="nv $HOME/.config/startup"
 alias srczsh="source $HOME/.zshrc"
@@ -42,6 +41,8 @@ alias delta="$HOME/sw/delta"
 alias dust="dust -r -d 1"
 alias fd="fdfind"
 alias quicktex="nv $HOME/code/tex/quick-equation/main.tex"
+alias tmuxify-command="nv $HOME/.config/nvim/tmuxify_command.sh"
+alias df="df -hx'squashfs'"
 
 
 ### FUNCTIONS COMMANDS ###
@@ -132,7 +133,3 @@ alias discord='silent flatpak run com.discordapp.Discord'
 alias skype='silent flatpak run com.skype.Client'
 alias syncthing="silent flatpak run me.kozec.syncthingtk"
 alias vpn-rob="sudo openvpn --config $HOME/doc/vpn/gregoireh.ovpn"
-
-
-### FUNCTIONS APPLICATIONS ###
-#

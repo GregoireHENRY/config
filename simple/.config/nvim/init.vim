@@ -1,9 +1,9 @@
 " Plugins
 call plug#begin()
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'jebaum/vim-tmuxify'
+Plug 'tpope/vim-fugitive'
 Plug 'simeji/winresizer'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " Default settings
@@ -42,8 +42,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 nnoremap <Char-60> :execute "tabmove" tabpagenr() - 2 <CR>
 nnoremap <Char-62> :execute "tabmove" tabpagenr() + 1 <CR>
-" nnoremap <C-s> :%s/<C-r><C-w>//g<Left><Left>
-" vnoremap <c-f> "hy/<C-r>h<CR>:%s/\<<C-r>h\>/<C-r>h/gc<left><left><left>
 nnoremap <c-s> :%s///gc<left><left><left>
 vnoremap <c-s> :s///gc<left><left><left>
 vnoremap / <Esc>/\%V
@@ -86,11 +84,13 @@ let g:lightline.mode_map = {
     \ }
 
 " tmuxify
-let g:tmuxify_custom_command = 'tmux split-window -d'
+let g:tmuxify_custom_command = 'tmux split-window -dl 10'
 let g:tmuxify_map_prefix = '<leader>m'
 let g:tmuxify_run = {}
 let g:tmuxify_global_maps = 1
-nmap <leader>tq :TxKill!<CR>
+let $TMUXIFY_COMMAND = stdpath('config') . "/tmuxify_command.vim"
+source $TMUXIFY_COMMAND
+nnoremap <silent> <leader>mx :TmuxifyCommand<CR>
 
 " Final config
 set cmdheight=1
