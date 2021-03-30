@@ -1,1 +1,7 @@
-/home/greg/.gitconfig
+[user]
+	name = gregH
+	email = contact@greghenry.xyz
+[core]
+	editor = nvim
+[github]
+	user = GregoireHENRY
