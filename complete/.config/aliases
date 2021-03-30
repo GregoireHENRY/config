@@ -14,7 +14,7 @@ alias nvac="nv $HOME/.config/aliases"
 alias nvhc="nv $HOME/.zsh_history"
 alias nvtc="nv $HOME/.tmux.conf"
 alias nvnc="nv $HOME/.config/nvim/init.vim"
-alias nvgt="nv -c ':Gedit :'"
+alias nvgs="nv -c ':Gs'"
 alias nvcg="nv $HOME/.config/startup"
 alias srczsh="source $HOME/.zshrc"
 alias tl="tmux ls"
@@ -24,15 +24,17 @@ alias tk="tmux kill-session -t"
 alias clc="clear && printf '\033[3J'"
 alias exa="exa --group-directories-first"
 alias l="pytool myls"
-alias ls="exa"
+alias ls="exa --group-directories-first"
+alias ll="ls -alh --git"
 alias c="clear; ls"
 alias ..="cd .."
 alias ...="cd ../.."
 alias rm="rm -ri"
 alias mv="mv -i"
-alias xclip="xclip -selection c"
+alias cp="cp -ri"
+alias xclip="xclip -selection c -r"
 alias tcopy="tmux show-buffer | xclip"
-alias cpwd="echo -n $(pwd) | xclip -i"
+alias cpwd="pwd | xclip"
 alias :q="exit"
 alias dodo="systemctl suspend"
 alias py="python3"
@@ -40,9 +42,14 @@ alias pip="py -m pip"
 alias delta="$HOME/sw/delta"
 alias dust="dust -r -d 1"
 alias fd="fdfind"
-alias quicktex="nv $HOME/code/tex/quick-equation/main.tex"
+alias equation-latex="nv $HOME/code/tex/quick-equation/main.tex"
 alias tmuxify-command="nv $HOME/.config/nvim/tmuxify_command.sh"
-alias df="df -hx'squashfs'"
+alias du="du -h"
+alias disk="df -hx'squashfs'"
+alias startup="$HOME/.config/startup"
+alias update="sudo apt update && sudo apt upgrade -y"
+alias record="arecord -f cd"
+alias git_modif_date="git ls-files -z | xargs -0 -n1 -I{} -- git log -1 --format=\"%ai {}\" {} | sort"
 
 
 ### FUNCTIONS COMMANDS ###
@@ -70,7 +77,7 @@ path() {
 	IFS=$old
 }
 copy() {
-    echo -n "$@" | xclip
+    echo "$@" | xclip
 }
 fcopy() {
     cat "$@" | xclip
@@ -84,25 +91,34 @@ tm() {
     if [[ $SESSION == "obs" ]]; then
         tmux new-session -s $SESSION -n "main" -c "$HOME/obs/ts" \; \
              send-keys 'c' C-m \; \
-             split-window -vc "$HOME/obs/ts/doc" \; \
+             split-window -hc "$HOME/obs/ts/doc" \; \
              new-window -n "A11" -c "$HOME/obs/rf_bench_a11"\; \
              send-keys 'c' C-m \; \
              attach
     elif [[ $SESSION == "main" ]]; then
         tmux new-session -s $SESSION -n "" -c "$HOME" \; \
              new-window -n "main" -c "$HOME"\; \
+             attach
+    elif [[ $SESSION == "rob" ]]; then
+        tmux new-session -s $SESSION -n "main" -c "$HOME/rob" \; \
+             split-window -vc "$HOME/rob" \; \
+             send-keys 'nv todo.md notes.md' C-m \; \
+             new-window -n "doc" -c "$HOME/rob/doc"\; \
+             split-window -vc "$HOME/rob/doc/ref" \; \
+             split-window -hc "$HOME/doc/nextcloud/kalast/doc" \; \
+             new-window -n "kalast" -c "$HOME/rob/code/kalast"\; \
              select-window -t 1 \; \
              attach
     # Simple sessions
-    else 
-        declare -A sessions=( ["rob"]="rob" )
+    else
+        declare -A sessions=( ["other"]="." )
         tmux new-session -s $SESSION -n "main" -c "$HOME/${sessions[$SESSION]}"
     fi
 }
 silent() {
     "$@" &>/dev/null &
 }
-replace-space() {
+space-remove() {
     for file in *; do mv "$file" `echo $file | tr ' ' '_'` ; done
 }
 
@@ -119,17 +135,23 @@ alias timidity='~/sw/timidity/script/timidity'
 alias ffplay='ffplay -vf "drawtext=text='\''%{pts\:hms}'\'':box=1:x=(w-tw)/2:y=h-(2*lh)"'
 alias vlc='flatpak run org.videolan.VLC &>/dev/null'
 alias krita='silent flatpak run org.kde.krita'
-alias teams='~/sw/teams/usr/bin/teams'
 alias xournal='flatpak run com.github.xournalpp.xournalpp &>/dev/null'
 alias gimp='flatpak run org.gimp.GIMP'
 alias okular='flatpak run org.kde.okular &>/dev/null'
 alias piksel='/home/grhenry/sw/piskel/piksel'
 alias foxit='/home/grhenry/sw/foxit/foxitsoftware/foxitreader/FoxitReader.sh 2>/dev/null &'
 alias zoom='silent flatpak run us.zoom.Zoom'
-alias vscode='silent flatpak run com.visualstudio.code'
+alias vscode='silent flatpak run com.vscodium.codium'
 alias slack='silent flatpak run com.slack.Slack'
 alias telegram='silent flatpak run org.telegram.desktop'
 alias discord='silent flatpak run com.discordapp.Discord'
 alias skype='silent flatpak run com.skype.Client'
 alias syncthing="silent flatpak run me.kozec.syncthingtk"
 alias vpn-rob="sudo openvpn --config $HOME/doc/vpn/gregoireh.ovpn"
+alias mellow="silent flatpak run com.gitlab.ColinDuquesnoy.MellowPlayer"
+alias meshlab="silent $HOME/sw/meshlab.appimage"
+alias teams="silent flatpak run com.microsoft.Teams"
+alias nextcloud="silent flatpak run com.nextcloud.desktopclient.nextcloud"
+alias glade="silent flatpak run org.gnome.Glade"
+alias mattermost="silent flatpak run com.mattermost.Desktop"
+alias cosmographia="silent $HOME/sw/cosmographia/Cosmographia.sh"

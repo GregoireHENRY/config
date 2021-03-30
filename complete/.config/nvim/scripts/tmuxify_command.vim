@@ -1,4 +1,4 @@
-let $TMUXIFY_COMMAND = stdpath('config') . "/tmuxify_command.sh"
+let $TMUXIFY_COMMAND = stdpath('config') . "/scripts/tmuxify_command.sh"
 
 command! -nargs=? TmuxifyCommand call s:TmuxifyCommand(<f-args>)
 

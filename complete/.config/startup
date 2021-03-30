@@ -2,7 +2,7 @@
 
 # Detect key press faster and repeat them faster.
 # Values are given in ms: delay and rate (default: 660 25).
-xset r rate 190 60
+xset r rate 170 70
 
 # Remap Caps Lock to Ctrl key.
 setxkbmap -option 'caps:ctrl_modifier'

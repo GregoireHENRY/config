@@ -1,6 +1,6 @@
 {
-    "diagnostic.displayByAle": true
-    //"python.linting.enabled": false
+    "diagnostic.displayByAle": false,
+    "python.linting.enabled": false
     //"python.linting.pylintEnabled": true,
     //"python.linting.pylintArgs": ["--rcfile", "~/.pylintrc"],
     //"python.linting.mypyEnabled": true,
