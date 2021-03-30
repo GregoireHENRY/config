@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="$PATH:$HOME/sw/pandoc/bin:$HOME/.cargo/bin:$HOME/sw:$HOME/.local/bin:/usr/local/go/bin:$HOME/sw/cspice"
-export EDITOR="/usr/bin/vim"
+export PATH="$PATH:$HOME/sw/pandoc/bin:$HOME/.cargo/bin:$HOME/sw:$HOME/.local/bin:/usr/local/go/bin"
+export EDITOR="/usr/bin/nvim"
 fpath+="${ZDOTDIR:-~}/.zsh_functions"
 export LFS="/mnt/lfs"
 
